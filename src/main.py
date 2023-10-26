@@ -17,6 +17,8 @@ class MainWindow(QtWidgets.QMainWindow, ):
         uic.loadUi("./UI/layout.ui",self)
         init_connectors(self)
         self.plot1=self.plotGraph1.plot()
+        self.plot2=self.plotGraph1.plot()
+        self.plot3=self.plotGraph1.plot()
         self.setWindowTitle("")
         self.setWindowIcon(QtGui.QIcon("./Images/radio-waves.png"))
 
@@ -41,11 +43,17 @@ def BrowseFile(self):
     eeg_data = data2[['FC5']]
     count=eeg_data.count(axis=0).values[0]
 
-    time_interval = 117/count
+    eeg_data2 = data2[['AF3']]
+    y_axis2 = eeg_data2.AF3.values
+
+    eeg_data3 = data2[['T8']]
+    y_axis3 = eeg_data3.T8.values
 
     y_axis = eeg_data.FC5.values
    
     x_axis = np.linspace(0, 117, count)
+    self.plot3.setData(x_axis, y_axis3)
+    self.plot2.setData(x_axis, y_axis2)
     self.plot1.setData(x_axis,y_axis)
     view_box=self.plot1.getViewBox()
 
