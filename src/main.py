@@ -1,12 +1,14 @@
 import sys
 from PyQt5 import QtGui, uic, QtWidgets
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
-
+import subprocess
 import csv, wfdb
 import numpy as np 
 import pandas as pd
 from math import ceil
 import pyqtgraph as pg
+import sys
+
 #Local Imports
 
 #Globals
@@ -111,11 +113,18 @@ def remove_outliers_iqr(data, column):
     return filtered_data
 
 
-
+def SurveyWindowOpen(self):
+    # sys.path.append('E:\Engineering\Instru_repo\InstrumentsTask2')
+    # import model_and_app
+    # result_window = model_and_app.ResultWindow()  
+    # result_window.show()
+    script_path = "E:\Engineering\Instru_repo\InstrumentsTask2\model_and_app.py" 
+    subprocess.run(["python", script_path])
 
 def init_connectors(self):
     self.browseBtn1.clicked.connect(lambda: BrowseFile(self))
     self.browseBtn2.clicked.connect(lambda: EnhancedSignals(self))
+    self.SurveyButton.clicked.connect(lambda: SurveyWindowOpen(self))
     
 
 def main():
